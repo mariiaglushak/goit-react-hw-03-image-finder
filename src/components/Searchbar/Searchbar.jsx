@@ -1,44 +1,45 @@
 import { Component } from 'react';
+import { BiSearchAlt2 } from 'react-icons/bi';
 
-import { SearchBox, SearchForm, SearchInput } from './SearchbarStyle';
-import searchIkon from '../../images/search.svg';
+import {
+  SearchBox,
+  SearchForm,
+  SearchInput,
+  SearchBtn,
+} from './SearchbarStyle';
 
 export default class Searchbar extends Component {
   state = {
-    name: '',
+    query: '',
   };
 
   handleNameChange = event => {
-    this.setState({ name: event.currentTarget.value.toLowerCase() });
+    this.setState({ query: event.currentTarget.value.toLowerCase() });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (this.state.name.trim() === '') {
+    if (this.state.query.trim() === '') {
       return;
     }
-    this.props.onSubmit(this.state.name);
-    this.setState({ name: '' });
+    this.props.onSubmit(this.state.query);
+    this.setState({ query: '' });
   };
 
   render() {
     return (
-      <SearchBox class="searchbar">
-        <SearchForm onSubmit={this.handleSubmit} class="form">
-          <button type="submit" class="button">
-            <span class="button-label">
-              Search
-              <img src={searchIkon} alt="" />
-            </span>
-          </button>
+      <SearchBox>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchBtn type="submit">
+            <BiSearchAlt2 />
+          </SearchBtn>
 
           <SearchInput
-            class="input"
             type="text"
-            value={this.state.name}
-            autocomplete="off"
-            autofocus
-            placeholder=""
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            value={this.state.query}
             onChange={this.handleNameChange}
           />
         </SearchForm>

@@ -21,7 +21,15 @@ export const SearchInput = styled.input`
   height: 40px;
   width: 200px;
   outline: none;
-  :focus {
-    border-color: #b0e0e6;
+  border-color: #42bbc4;
+  outline-color: #80eaf1;
+`;
+export const SearchBtn = styled.button`
+  width: 40px;
+  background-color: #78e9e9;
+  border-color: transparent;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    background-color: #30505a;
   }
 `;
