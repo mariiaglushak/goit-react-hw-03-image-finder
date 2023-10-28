@@ -8,22 +8,25 @@ import Loader from './Loader/Loader';
 
 export default class App extends Component {
   state = {
-    page: null,
+    page: 1,
     query: '',
     images: [],
     isLoading: false,
     loadMoreWisible: false,
   };
 
-  handerFormSubmit = query => {
-    this.setState({ query: query });
-  };
-  handlerBtnLoadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1 }));
-    console.log(this.state.page, 'наступна сторінка');
+  handerFormSubmit = ({ query }) => {
+    this.setState({ query });
   };
 
   async componentDidUpdate(prevProps, prevState) {
+    // if (prevState.query !== this.state.query) {
+    //   this.setState({ page: 1 });
+    //   console.log(this.state.page);
+    // }
+    // if (prevProps.query !== this.props.query) {
+    //   this.setState({ page: 1 });
+    // }
     if (
       this.state.page !== prevState.page ||
       this.state.query !== prevState.query
@@ -34,25 +37,29 @@ export default class App extends Component {
         this.props.query,
         this.props.page
       );
-      console.log(dataFromSerwer.data);
-      // const { data } = dataFromSerwer;
-      const { hits } = dataFromSerwer.data;
-      // if (prevProps.query !== this.props.query) {
-      //   this.setState({ page: 1 });
-      // }
-      try {
-        this.setState(({ images }) => ({
-          images: [...images, ...hits],
+      console.log(dataFromSerwer);
 
-          loadMoreWisible: true,
-        }));
-        if (hits.length === 0) {
+      try {
+        const { data } = dataFromSerwer;
+        // const { data } = dataFromSerwer.data;
+        // this.setState(({ images }) => ({
+        //   images: [...images, ...hits],
+        //   loadMoreWisible: true,
+        // }));
+        this.setState({ images: data.hits });
+
+        if (data.hits.length === 0) {
           alert('за вашим запитом нічого не знайдено');
         }
-
         // this.handlerButton(
         //   this.setState(prevState => ({ images: [...prevState], ...hits }))
         // );
+        // if (data.totalHits > 12) {
+        //   this.setState(prevState => ({
+        //     images: [...prevState.images, ...data.hits],
+        //     loadMoreWisible: true,
+        //   }));
+        // }
       } catch (err) {
         console.log(err, 'vb');
       } finally {
@@ -60,6 +67,10 @@ export default class App extends Component {
       }
     }
   }
+  handlerBtnLoadMore = () => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
+    console.log(this.state.page, 'наступна сторінка');
+  };
 
   render() {
     return (

@@ -9,7 +9,7 @@ const ImageGalleryItem = ({ array }) => {
   //   isLoading: false,
   //   error: null,
   // };
-
+  console.log(array, 'hh');
   return (
     <>
       {array !== null &&
