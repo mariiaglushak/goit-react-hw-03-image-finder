@@ -2,26 +2,14 @@
 // import { requestFetch } from 'Api/request';
 import { ItemCard, ImgCard } from './ImageGalleryItemStyle';
 
-const ImageGalleryItem = ({ array }) => {
-  // state = {
-  //   images: [],
-  //   query: '',
-  //   isLoading: false,
-  //   error: null,
-  // };
-  console.log(array, 'hh');
+const ImageGalleryItem = ({ href, src }) => {
   return (
     <>
-      {array !== null &&
-        array.map(({ id, webformatURL, largeImageURL }) => {
-          return (
-            <ItemCard key={id}>
-              <a href={webformatURL}>
-                <ImgCard src={largeImageURL} alt="" />
-              </a>
-            </ItemCard>
-          );
-        })}
+      <ItemCard>
+        <a href={href}>
+          <ImgCard src={src} alt="" />
+        </a>
+      </ItemCard>
     </>
   );
 };
