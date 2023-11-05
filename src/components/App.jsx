@@ -12,7 +12,7 @@ export default class App extends Component {
     query: '',
     images: [],
     isLoading: false,
-    loadMoreWisible: false,
+    modalIsOpen: false,
   };
 
   handerFormSubmit = answer => {
@@ -45,14 +45,17 @@ export default class App extends Component {
           this.setState({ loadMoreWisible: true });
         }
 
-        if (data.totalHits === data.hits.length || data.hits.length < 12) {
+        if (data.hits.length === 0 && data.totalHits !== 0) {
+          alert('фото закінчились');
           this.setState({ loadMoreWisible: false });
         }
+
+        if (data.totalHits <= 12) {
+          this.setState({ loadMoreWisible: false });
+        }
+
         if (data.totalHits === 0) {
           alert('за вашим запитом нічого не знайдено');
-        }
-        if (data.hits.length === 0) {
-          alert('фото закінчились');
         }
       } catch (err) {
         console.log(err);
@@ -66,7 +69,6 @@ export default class App extends Component {
     this.setState(prevState => ({
       page: prevState.page + 1,
     }));
-    console.log(this.state.page, 'наступна сторінка');
   };
 
   render() {

@@ -2,7 +2,6 @@ import { Gallery } from './ImageGalleryStyle';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
 const ImageGallery = ({ arrayImages }) => {
-  console.log(arrayImages, 'масив');
   return (
     <>
       <Gallery>

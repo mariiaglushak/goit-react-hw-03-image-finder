@@ -15,3 +15,8 @@ export const ImgCard = styled.img`
   width: 100%;
   height: 100%;
 `;
+export const ImgModal = styled.img`
+  display: block;
+  width: 770px;
+  height: 450px;
+`;
