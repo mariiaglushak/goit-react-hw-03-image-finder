@@ -46,7 +46,6 @@ export default class App extends Component {
         }
 
         if (data.hits.length === 0 && data.totalHits !== 0) {
-          console.log(this.state.images.length);
           alert('фото закінчились');
           this.setState({ loadMoreWisible: false });
         }
