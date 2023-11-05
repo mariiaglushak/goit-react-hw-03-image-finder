@@ -16,7 +16,7 @@ export default class App extends Component {
   };
 
   handerFormSubmit = answer => {
-    this.setState({ query: answer });
+    this.setState({ page: 1, query: answer });
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -46,6 +46,7 @@ export default class App extends Component {
         }
 
         if (data.hits.length === 0 && data.totalHits !== 0) {
+          console.log(this.state.images.length);
           alert('фото закінчились');
           this.setState({ loadMoreWisible: false });
         }
